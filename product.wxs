@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+
+  <Package Name="Spurious WIX1113"
+           Language="0"
+           Version="1.0.0.0"
+           Manufacturer="Acme Inc."
+           InstallerVersion="405"
+           Scope="perMachine"
+           UpgradeCode="AB96FF9F-5CBF-4A39-8855-517262083B1E">
+
+    <MajorUpgrade DowngradeErrorMessage="Setup will exit."/>
+
+    <Feature Id="ProductFeature" Title="installer" Level="1">
+      <ComponentGroupRef Id="TheFiles"/>
+    </Feature>
+
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Name="!(bind.Property.ProductName)" Id="INSTALLDIR"/>
+    </StandardDirectory>
+
+    <ComponentGroup Id="TheFiles" Directory="INSTALLDIR">
+      <File Source="!(bindpath.Files)\Client.exe">
+        <Shortcut Id="client.exe"
+                  Advertise="yes"
+                  Directory="ProgramMenuFolder"
+                  Name="Client"/>
+      </File>
+    </ComponentGroup>
+
+  </Package>
+
+</Wix>
